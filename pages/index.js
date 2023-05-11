@@ -68,7 +68,7 @@ export default function Home({initialItems}) {
         <div className="flex justify-between mt-10">
             <div>
             <SVG
-              text={'https://adidasxbape.com'}
+              text={'https://bapexadidas.com'}
               options={{
                 margin: 0,
                 width: 170,
