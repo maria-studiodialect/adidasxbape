@@ -58,10 +58,10 @@ export default function Home({initialItems}) {
         </div>
         <div className="my-2 py-2">
           {sortedItems.slice(0, 10).map((item, i) => (
-            <div key={i} className="grid grid-cols-[40%_35%_25%] items-center text-4xl 2xl:text-[5.5rem] px-8 py-3 mb-16 border-8 border-magenta">
+            <div key={i} className="grid grid-cols-[40%_35%_25%] items-center text-[5.5rem] px-8 py-3 mb-16 border-8 border-magenta">
               <div className="uppercase pt-5"><span className="mr-10">{i+1}.</span> {item.fields.Name}</div>
               <div className="justify-self-end pt-5">{formatDate(item.fields.Date)}</div>
-              <div className="justify-self-end flex items-bottom"><div className="text-6xl 2xl:text-9xl pt-5">{item.fields.Result < 100 ? '0' + item.fields.Result : item.fields.Result}</div><img src="basketball.svg" className="w-[6vw] pl-6"/></div>
+              <div className="justify-self-end flex items-bottom"><div className="text-9xl pt-5">{item.fields.Result < 100 ? '0' + item.fields.Result : item.fields.Result}</div><img src="basketball.svg" className="w-[6vw] pl-6"/></div>
             </div>
           ))}
         </div>
