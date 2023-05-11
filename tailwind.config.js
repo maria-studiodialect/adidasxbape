@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         magenta: '#EC0089', 
-        dark: '#221F1F'
+        dark: '#000000'
       },
       screens: {
         '2xl': '2000px',
