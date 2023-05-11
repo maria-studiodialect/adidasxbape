@@ -28,8 +28,6 @@ export async function getServerSideProps(context) {
 export default function Home({initialItems}) {
   const [records, setRecords] = useState(initialItems);
   const { SVG } = useQRCode();
-  const router = useRouter()
-
 
 
   useEffect(() => {
@@ -91,7 +89,7 @@ export default function Home({initialItems}) {
                 width: 170,
                 color: {
                   dark: '#EC0089',
-                  light: '#000000',
+                  light: '##221F1F',
                 },
               }}
             />
