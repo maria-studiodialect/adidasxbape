@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { table, minifyItems } from "../utils/Airtable";
 import { useQRCode } from 'next-qrcode';
-
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from 'next/router';
 
 
 export async function getServerSideProps(context) {
@@ -25,7 +26,23 @@ export async function getServerSideProps(context) {
 
 
 export default function Home({initialItems}) {
+  const [records, setRecords] = useState(initialItems);
   const { SVG } = useQRCode();
+  const router = useRouter()
+
+
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetch('/api/items')
+        .then(response => response.json())
+        .then(data => setRecords(data))
+        .catch(error => console.log(error));
+    }, 5000);
+  
+    return () => clearInterval(intervalId);
+  }, []);
+  
 
   const sortedItems = initialItems.sort((a, b) => b.fields.Result - a.fields.Result);
   function formatDate(dateString) {
@@ -57,7 +74,7 @@ export default function Home({initialItems}) {
         </div>
         </div>
         <div className="my-2 py-2">
-          {sortedItems.slice(0, 10).map((item, i) => (
+          {records.sort((a, b) => b.fields.Result - a.fields.Result).slice(0, 10).map((item, i) => (
             <div key={i} className="grid grid-cols-[40%_35%_25%] items-center text-[5.5rem] px-8 py-3 mb-16 border-8 border-magenta">
               <div className="uppercase pt-5"><span className="mr-10">{i+1}.</span> {item.fields.Name}</div>
               <div className="justify-self-end pt-5">{formatDate(item.fields.Date)}</div>
