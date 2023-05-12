@@ -4,6 +4,15 @@ import { useQRCode } from 'next-qrcode';
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from 'next/router';
 import { Variants, motion, useAnimate } from "framer-motion";
+import badWords from 'bad-words';
+
+
+const isNicknameClean = (nickname) => {
+  const filter = new badWords();
+  return !filter.isProfane(nickname);
+};
+
+
 
 
 export async function getServerSideProps(context) {
@@ -77,7 +86,9 @@ export default function Home({initialItems}) {
     const formattedDate = `${day < 10 ? '0' + day : day} - ${month < 10 ? '0' + month : month} - ${year}`;
     return formattedDate;
   }
-  console.log(isOpen)
+
+  const filteredItems = records.filter((item) => isNicknameClean(item.fields.Nickname));
+
   return (
     <div className="mx-32 my-36">
       <Head>
@@ -122,9 +133,9 @@ export default function Home({initialItems}) {
         }}
         className="my-2 py-2">
 
-          {records.sort((a, b) => b.fields.Result - a.fields.Result).slice(0, 10).map((item, i) => (
+          {filteredItems.sort((a, b) => b.fields.Result - a.fields.Result).slice(0, 10).map((item, i) => (
             <motion.div variants={itemVariants} key={i} className="grid grid-cols-[40%_35%_25%] items-center text-[5.5rem] px-8 py-3 mb-16 border-8 border-magenta">
-              <div className="uppercase pt-5"><span className="mr-10">{i+1}.</span> {item.fields.Name}</div>
+              <div className="uppercase pt-5"><span className="mr-10">{i+1}.</span> {item.fields.Nickname}</div>
               <div className="justify-self-end pt-5">{formatDate(item.fields.Date)}</div>
               <div className="justify-self-end flex items-bottom"><div className="text-9xl pt-5">{item.fields.Result < 100 ? '0' + item.fields.Result : item.fields.Result}</div><img src="basketball.svg" className="w-[6vw] pl-6"/></div>
             </motion.div>
