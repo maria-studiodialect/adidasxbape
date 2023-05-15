@@ -134,10 +134,10 @@ export default function Home({initialItems}) {
         className="my-2 py-2 min-h-[67vh]">
 
           {filteredItems.sort((a, b) => b.fields.Result - a.fields.Result).slice(0, 10).map((item, i) => (
-            <motion.div variants={itemVariants} key={i} className="grid grid-cols-[40%_35%_25%] items-center text-[5.5rem] px-8 py-5 mb-16 border-8 border-magenta">
-              <div className="uppercase"><span className="mr-10">{i+1}.</span> {item.fields.Nickname}</div>
-              <div className="justify-self-end">{formatDate(item.fields.Date)}</div>
-              <div className="justify-self-end flex items-bottom"><div className="text-9xl pb-2">{item.fields.Result < 100 ? '0' + item.fields.Result : item.fields.Result}</div><img src="basketball.svg" className="w-[6vw] pl-6"/></div>
+            <motion.div variants={itemVariants} key={i} className="grid grid-cols-[40%_35%_25%] items-center text-[5.5rem] px-8 py-3 mb-16 border-8 border-magenta">
+              <div className="uppercase pt-3"><span className="mr-10">{i+1}.</span> {item.fields.Nickname}</div>
+              <div className="justify-self-end pt-3">{formatDate(item.fields.Date)}</div>
+              <div className="justify-self-end flex items-bottom"><div className="text-9xl pt-3">{item.fields.Result < 100 ? '0' + item.fields.Result : item.fields.Result}</div><img src="basketball.svg" className="w-[6vw] pl-6"/></div>
             </motion.div>
           ))}
         </motion.div>
